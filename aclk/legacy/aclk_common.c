@@ -1,6 +1,6 @@
 #include "aclk_common.h"
 
-#include "../../daemon/common.h"
+#include "daemon/common.h"
 
 #ifdef ENABLE_ACLK
 #include <libwebsockets.h>
@@ -100,7 +100,7 @@ static inline void safe_log_proxy_error(char *str, const char *proxy)
     freez(log);
 }
 
-static inline int check_socks_enviroment(const char **proxy)
+static inline int check_socks_environment(const char **proxy)
 {
     char *tmp = getenv("socks_proxy");
 
@@ -118,7 +118,7 @@ static inline int check_socks_enviroment(const char **proxy)
     return 1;
 }
 
-static inline int check_http_enviroment(const char **proxy)
+static inline int check_http_environment(const char **proxy)
 {
     char *tmp = getenv("http_proxy");
 
@@ -145,7 +145,7 @@ const char *aclk_lws_wss_get_proxy_setting(ACLK_PROXY_TYPE *type)
         return proxy;
 
     if (strcmp(proxy, ACLK_PROXY_ENV) == 0) {
-        if (check_socks_enviroment(&proxy) == 0) {
+        if (check_socks_environment(&proxy) == 0) {
 #ifdef LWS_WITH_SOCKS5
             *type = PROXY_TYPE_SOCKS5;
             return proxy;
@@ -156,7 +156,7 @@ const char *aclk_lws_wss_get_proxy_setting(ACLK_PROXY_TYPE *type)
                 proxy);
 #endif
         }
-        if (check_http_enviroment(&proxy) == 0)
+        if (check_http_environment(&proxy) == 0)
             *type = PROXY_TYPE_HTTP;
         return proxy;
     }
@@ -252,6 +252,7 @@ struct label *add_aclk_host_labels(struct label *label) {
             proxy_str = "none";
             break;
     }
+    label = add_label_to_list(label, "_aclk_impl", "Legacy", LABEL_SOURCE_AUTO);
     return add_label_to_list(label, "_aclk_proxy", proxy_str, LABEL_SOURCE_AUTO);
 #else
     return label;

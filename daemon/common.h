@@ -3,7 +3,7 @@
 #ifndef NETDATA_COMMON_H
 #define NETDATA_COMMON_H 1
 
-#include "../libnetdata/libnetdata.h"
+#include "libnetdata/libnetdata.h"
 
 // ----------------------------------------------------------------------------
 // shortcuts for the default netdata configuration
@@ -66,18 +66,23 @@
 #include "claim/claim.h"
 
 // netdata agent cloud link
+#ifndef ACLK_NG
 #include "aclk/legacy/agent_cloud_link.h"
+#else
+#include "aclk/aclk.h"
+#endif
 
 // global GUID map functions
 
 // netdata agent spawn server
 #include "spawn/spawn.h"
 
-// the netdata deamon
+// the netdata daemon
 #include "daemon.h"
 #include "main.h"
 #include "signals.h"
 #include "commands.h"
+#include "analytics.h"
 
 // global netdata daemon variables
 extern char *netdata_configured_hostname;

@@ -26,35 +26,38 @@ issues](https://github.com/netdata/netdata/issues). Use the search bar to look f
 collector—we may be looking for contributions from users such as yourself! If you don't see the collector there, make a
 [feature request](https://community.netdata.cloud/c/feature-requests/7/none) on our community forums.
 
--   [Service and application collectors](#service-and-application-collectors)
-    -   [APM (application performance monitoring)](#apm-application-performance-monitoring)
-    -   [Containers and VMs](#containers-and-vms)
-    -   [Data stores](#data-stores)
-    -   [Distributed computing](#distributed-computing)
-    -   [Email](#email)
-    -   [Kubernetes](#kubernetes)
-    -   [Logs](#logs)
-    -   [Messaging](#messaging)
-    -   [Network](#network)
-    -   [Provisioning](#provisioning)
-    -   [Remote devices](#remote-devices)
-    -   [Search](#search)
-    -   [Storage](#storage)
-    -   [Web](#web)
--   [System collectors](#system-collectors)
-    -   [Applications](#applications)
-    -   [Disks and filesystems](#disks-and-filesystems)
-    -   [eBPF (extended Berkeley Packet Filter)](#ebpf)
-    -   [Hardware](#hardware)
-    -   [Memory](#memory)
-    -   [Networks](#networks)
-    -   [Processes](#processes)
-    -   [Resources](#resources)
-    -   [Users](#users)
--   [Netdata collectors](#netdata-collectors)
--   [Orchestrators](#orchestrators)
--   [Third-party collectors](#third-party-collectors)
--   [Etc](#etc)
+- [Supported collectors list](#supported-collectors-list)
+  - [Service and application collectors](#service-and-application-collectors)
+    - [Generic](#generic)
+    - [APM (application performance monitoring)](#apm-application-performance-monitoring)
+    - [Containers and VMs](#containers-and-vms)
+    - [Data stores](#data-stores)
+    - [Distributed computing](#distributed-computing)
+    - [Email](#email)
+    - [Kubernetes](#kubernetes)
+    - [Logs](#logs)
+    - [Messaging](#messaging)
+    - [Network](#network)
+    - [Provisioning](#provisioning)
+    - [Remote devices](#remote-devices)
+    - [Search](#search)
+    - [Storage](#storage)
+    - [Web](#web)
+  - [System collectors](#system-collectors)
+    - [Applications](#applications)
+    - [Disks and filesystems](#disks-and-filesystems)
+    - [eBPF](#ebpf)
+    - [Hardware](#hardware)
+    - [Memory](#memory)
+    - [Networks](#networks)
+    - [Operating systems](#operating-systems)
+    - [Processes](#processes)
+    - [Resources](#resources)
+    - [Users](#users)
+  - [Netdata collectors](#netdata-collectors)
+  - [Orchestrators](#orchestrators)
+  - [Third-party collectors](#third-party-collectors)
+  - [Etc](#etc)
 
 ## Service and application collectors
 
@@ -366,6 +369,7 @@ The Netdata Agent can collect these system- and hardware-level metrics using a v
 -   [Device mapper](/collectors/proc.plugin/README.md): Gather metrics about the Linux device mapper with the proc
     collector.
 -   [Disk space](/collectors/diskspace.plugin/README.md): Collect disk space usage metrics on Linux mount points.
+-   [Clock synchronization](/collectors/timex.plugin/README.md): Collect the system clock synchronization status on Linux.
 -   [Files and directories](https://learn.netdata.cloud/docs/agent/collectors/go.d.plugin/modules/filecheck): Gather
     metrics about the existence, modification time, and size of files or directories.
 -   [ioping.plugin](/collectors/ioping.plugin/README.md): Measure disk read/write latency.
@@ -522,10 +526,11 @@ default. To use a third-party collector, visit their GitHub/documentation page a
 -   [CyberPower UPS](https://github.com/HawtDogFlvrWtr/netdata_cyberpwrups_plugin): Polls CyberPower UPS data using
     PowerPanel® Personal Linux.
 -   [Logged-in users](https://github.com/veksh/netdata-numsessions): Collect the number of currently logged-on users.
+-   [nextcloud](https://github.com/arnowelzel/netdata-nextcloud): Monitor Nextcloud servers.
 -   [nim-netdata-plugin](https://github.com/FedericoCeratto/nim-netdata-plugin): A helper to create native Netdata
     plugins using Nim.
 -   [Nvidia GPUs](https://github.com/coraxx/netdata_nv_plugin): Monitor Nvidia GPUs.
--   [Teamspeak 3](https://github.com/coraxx/netdata_ts3_plugin): Plls active users and bandwidth from TeamSpeak 3
+-   [Teamspeak 3](https://github.com/coraxx/netdata_ts3_plugin): Pulls active users and bandwidth from TeamSpeak 3
     servers.
 -   [SSH](https://github.com/Yaser-Amiri/netdata-ssh-module): Monitor failed authentication requests of an SSH server.
 

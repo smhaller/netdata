@@ -11,12 +11,18 @@
 #include "libnetdata/ebpf/ebpf.h"
 
 #define NETDATA_APPS_FAMILY "apps"
-#define NETDATA_APPS_FILE_GROUP "ebpf file"
-#define NETDATA_APPS_VFS_GROUP "ebpf vfs"
-#define NETDATA_APPS_PROCESS_GROUP "ebpf process"
-#define NETDATA_APPS_NET_GROUP "ebpf net"
+#define NETDATA_APPS_FILE_GROUP "file (eBPF)"
+#define NETDATA_APPS_VFS_GROUP "vfs (eBPF)"
+#define NETDATA_APPS_PROCESS_GROUP "process (eBPF)"
+#define NETDATA_APPS_NET_GROUP "net (eBPF)"
+#define NETDATA_APPS_CACHESTAT_GROUP "page cache (eBPF)"
+#define NETDATA_APPS_DCSTAT_GROUP "directory cache (eBPF)"
 
 #include "ebpf_process.h"
+#include "ebpf_dcstat.h"
+#include "ebpf_cachestat.h"
+#include "ebpf_sync.h"
+#include "ebpf_swap.h"
 
 #define MAX_COMPARE_NAME 100
 #define MAX_NAME 100
@@ -104,6 +110,11 @@ struct target {
 
     uid_t uid;
     gid_t gid;
+
+    // Changes made to simplify integration between apps and eBPF.
+    netdata_publish_cachestat_t cachestat;
+    netdata_publish_dcstat_t dcstat;
+    netdata_publish_swap_t swap;
 
     /* These variables are not necessary for eBPF collector
     kernel_uint_t minflt;
@@ -424,7 +435,11 @@ extern size_t read_bandwidth_statistic_using_pid_on_target(ebpf_bandwidth_t **ep
 
 extern void collect_data_for_all_processes(int tbl_pid_stats_fd);
 
+extern void clean_global_memory();
+
 extern ebpf_process_stat_t **global_process_stats;
 extern ebpf_process_publish_apps_t **current_apps_data;
+extern netdata_publish_cachestat_t **cachestat_pid;
+extern netdata_publish_dcstat_t **dcstat_pid;
 
 #endif /* NETDATA_EBPF_APPS_H */
